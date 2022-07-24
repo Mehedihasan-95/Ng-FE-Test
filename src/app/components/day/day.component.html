@@ -1,0 +1,21 @@
+<div class="d-flex flex-wrap">
+
+        <div class="dayBox p-3">
+            <!-- day number -->
+            <div class="dateNumber">
+                <p class="m-0">{{day}}</p>
+            </div>
+
+            <!-- appointment lists -->
+            <div class="appoinmentLists mt-4 pb-2">
+                <div *ngFor="let appointment of sortCurerntDayAppointments; let i =index;" class="appointment pb-1">
+                    <button mat-raised-button color="accent" class="w-100" (click)="onOpeningDialog(appointment)">
+                        Appointment - {{i}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 
+<mat-calendar #calendar [(selected)]="selectedDate">
+</mat-calendar> -->
