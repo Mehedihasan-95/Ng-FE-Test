@@ -2,22 +2,18 @@
     <form>
         <mat-form-field appearance="fill">
             <mat-label>Select Month</mat-label>
-            <mat-select [(ngModel)]="selectedValue" name="months">
+            <mat-select #monthSelected [(value)]="selectedValue" >
                 <mat-option *ngFor="let month of months" [value]="month">
                     {{month.monthName}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
     </form>
-    {{selectedValue?.value}}
     <button mat-raised-button color="primary" (click)="opd()">Cretate Appointment</button>
 </div>
 
 <div class="d-flex flex-wrap">
-<ng-container *ngFor="let _ of [].constructor(selectedValue?.value); let c = index;">
-    
-        <app-day [day]="c+1" [month]="selectedValue?.index"></app-day>
+<ng-container *ngFor="let d of months.constructor(selectedValue?.monthDay); let c = index">
+        <app-day [day]="c+1" [month]="selectedValue?.monthNumber"></app-day>
     </ng-container>
 </div>
-<!-- <div *ngFor="let value of counter(selectedValue); let c = index;">
-</div> -->
