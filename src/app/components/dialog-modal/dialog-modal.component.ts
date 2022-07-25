@@ -10,6 +10,7 @@ export interface DialogData {
   age: number;
   date: string;
   time: string;
+  isEditable:boolean;
 }
 @Component({
   selector: 'app-dialog-modal',
@@ -28,6 +29,11 @@ export class DialogModalComponent{
   });
 
   ngOnInit(){
+    if (!this.data.isEditable){
+      this.appointmentForm.disable();
+      return;
+    }
+    this.appointmentForm.enable();
   }
   
   constructor(

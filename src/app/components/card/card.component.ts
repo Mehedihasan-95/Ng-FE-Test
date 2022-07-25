@@ -63,6 +63,7 @@ export class CardComponent implements OnInit {
         age: '',
         date: Date.now(),
         time: '',
+        isEditable:true,
       }
     })
   }

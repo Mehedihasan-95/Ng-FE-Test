@@ -147,6 +147,7 @@ export class DayComponent {
         age: e.age,
         date: e.date,
         time: e.time,
+        isEditable:false,
       }
     })
 
