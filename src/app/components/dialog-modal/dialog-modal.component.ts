@@ -18,6 +18,7 @@ export interface DialogData {
   styleUrls: ['./dialog-modal.component.scss']
 })
 export class DialogModalComponent{
+  appointments: any;
   appointmentForm = this.fb.group({
     firstName: [this.data.firstName, Validators.required],
     lastName: [this.data.lastName, Validators.required],
@@ -34,16 +35,14 @@ export class DialogModalComponent{
       return;
     }
     this.appointmentForm.enable();
+
+    this.appointments = JSON.parse(localStorage.getItem('appointmentList') || "[]");
   }
   
   constructor(
     private fb: FormBuilder, 
     public dialogRef: MatDialogRef<DialogModalComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-    store(id:any, item:any) {
-     return localStorage.setItem(JSON.stringify(id), JSON.stringify(item));  
-    }
 
   onSubmit() {
     let newDate =  formatDate(new Date(this.appointmentForm.value.date), 'yyyy-MM-dd', 'en')
@@ -56,9 +55,9 @@ export class DialogModalComponent{
      "date": newDate,  
      "time": this.appointmentForm.value.time,
     }
-
-    this.store(newDate, obj)
-   //  let a = JSON.stringify(this.appointmentForm.value)
+    this.appointments.push(obj);
+    localStorage.setItem('appointmentList', JSON.stringify(this.appointments));
+    this.appointmentForm.reset();
   }
  
   
@@ -68,7 +67,3 @@ export class DialogModalComponent{
   
 }
 
-// setInterval(()=>{
-//   console.log(localStorage);
-  
-// },15000)
